@@ -10,8 +10,8 @@
       <!-- el header aqui -->
       <nav>
         <ul>
-          <li>Registrar</li>
-          <li>Iniciar Sesión</li>
+          <li><a href="#">Registrar</a></li>
+          <li><a href="#">Iniciar Sesión</a></li>
         </ul>
       </nav>
     </header>
@@ -20,9 +20,9 @@
       <!-- aqui el menú de categorias -->
       <p>Categorías</p>
       <ul id="category-list">
-        <li>Tecnología</li>
-        <li>Entretenimiento</li>
-        <li>Salud y Bellezaa</li>
+        <li><a href="#">Tecnología</a></li>
+        <li><a href="#">Entretenimiento</a></li>
+        <li><a href="#">Salud</a></li>
       </ul>
     </aside>
 
@@ -36,6 +36,20 @@
 
     <footer>
       <!-- El footer para los pies de páginas y conctactos -->
+      <ul class="footer-social">
+        <li class="footer-item">
+          <a href="#" target="_blank">Facebook</a>
+        </li>
+
+        <li class="footer-item">
+          <a href="#">Twitter</a>
+        </li>
+      </ul>
+
+
+      <div class="copy">
+        &copy 2018 Anuncio Sahagún
+      </div>
     </footer>
 
 
