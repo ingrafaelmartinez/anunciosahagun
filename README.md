@@ -1,2 +1,2 @@
 # anunciosahagun
-Creacion del repositorio para desarrollar la web de la empresa
+Creacion del repositorio para desarrollo colaborativo
