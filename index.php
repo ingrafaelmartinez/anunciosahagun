@@ -1,3 +1,7 @@
+<?php
+ include 'scripts/funciones.php';
+Conectar();
+?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -20,9 +24,14 @@
       <!-- aqui el menú de categorias -->
       <p>Categorías</p>
       <ul id="category-list">
-        <li><a href="#">Tecnología</a></li>
-        <li><a href="#">Entretenimiento</a></li>
-        <li><a href="#">Salud</a></li>
+        <?php
+        $infocat = ListarCategoria();
+        foreach ($infocat as $valor): ?>
+          <li><a href="vercat.php?cat=<?=$valor[0]?>"><?=$valor[1]?></a></li>
+        <?php endforeach; ?>
+
+        <!-- <li><a href="#">Entretenimiento</a></li>
+        <li><a href="#">Salud</a></li> -->
       </ul>
     </aside>
 
