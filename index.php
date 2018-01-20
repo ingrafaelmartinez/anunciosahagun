@@ -19,15 +19,18 @@ Conectar();
         </ul>
       </nav>
     </header>
+<div class="contenedor">
+
 
     <aside class="categorias">
       <!-- aqui el menú de categorias -->
-      <p>Categorías</p>
+      <h2>Categorías</h2>
       <ul id="category-list">
         <?php
         $infocat = ListarCategoria();
         foreach ($infocat as $valor): ?>
           <li><a href="vercat.php?cat=<?=$valor[0]?>"><?=$valor[1]?></a></li>
+          <hr>
         <?php endforeach; ?>
 
         <!-- <li><a href="#">Entretenimiento</a></li>
@@ -36,13 +39,17 @@ Conectar();
     </aside>
 
     <section>
+      <h2></h2>
+      <div class="">
+
+      </div>
       <!-- aqui el section para los anuncios -->
     </section>
 
     <section>
       <!-- aqui el section para los anuncios -->
     </section>
-
+</div>
     <footer>
       <!-- El footer para los pies de páginas y conctactos -->
       <ul class="footer-social">
