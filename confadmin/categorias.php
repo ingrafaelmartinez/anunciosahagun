@@ -32,13 +32,15 @@ Conectar();
           <tr>
             <th>Codigo</th>
             <th>Nombre</th>
+            <th>accion</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($infocat as $valor): ?>
             <tr>
               <td><?=$valor[0]?></td>
-              <td><?=$valor[1]?></td>            
+              <td><?=$valor[1]?></td>
+              <td><a href="EditarCat.php?cat=<?=$valor[0]?>">Editar</a></td>
             </tr>
           <?php endforeach; ?>
 
