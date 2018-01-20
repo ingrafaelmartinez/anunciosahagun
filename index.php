@@ -10,14 +10,25 @@ Conectar();
     <title>Cuponera Sahagún</title>
   </head>
   <body>
-    <header>
-      <!-- el header aqui -->
-      <nav>
-        <ul>
-          <li><a href="#">Registrar</a></li>
-          <li><a href="#">Iniciar Sesión</a></li>
-        </ul>
-      </nav>
+    <header id="main-header">
+    
+    <a id="logo-header" href="index.php">
+      <span class="site-name">ANUNCIOS</span>
+      <span class="site-desc">Compra facil sin salir de tu casa</span>
+    </a> <!-- / #logo-header -->
+
+    <nav>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Login </a></li>
+        <li><a href="#">Registrate</a></li>
+      </ul>
+    </nav><!-- / nav -->
+
+  </header><!-- / #main-header -->
+
+  
+  <section id="main-content">
     </header>
 <div class="contenedor">
 
