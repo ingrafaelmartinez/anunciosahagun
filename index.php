@@ -21,7 +21,7 @@ Conectar();
       <ul>
         <li><a href="#">Inicio</a></li>
         <li><a href="#">Login </a></li>
-        <li><a href="#">Registrate</a></li>
+        <li><a href="registro.php">Registrate</a></li>
       </ul>
     </nav><!-- / nav -->
 
@@ -62,6 +62,11 @@ Conectar();
     </section>
 </div>
     <footer>
+      <div>
+        <ul>
+          <li><a href="">Vende Aqui</a></li>
+        </ul>
+      </div>
       <!-- El footer para los pies de páginas y conctactos -->
       <ul class="footer-social">
         <li class="footer-item">

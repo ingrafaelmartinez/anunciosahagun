@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-01-2018 a las 13:31:34
+-- Tiempo de generación: 22-01-2018 a las 20:29:30
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -75,6 +75,93 @@ INSERT INTO `tb_categ` (`id_cat`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tb_compra`
+--
+
+CREATE TABLE `tb_compra` (
+  `id` int(11) NOT NULL,
+  `id_oferta` int(11) NOT NULL,
+  `id_comprador` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_cond_serv`
+--
+
+CREATE TABLE `tb_cond_serv` (
+  `id` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `contenido` longtext COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_empr_public`
+--
+
+CREATE TABLE `tb_empr_public` (
+  `id` int(11) NOT NULL,
+  `nit` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `rasonSocial` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `telefono` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `direccion` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `ciudad` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `departamento` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `pais` varchar(150) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_infemp`
+--
+
+CREATE TABLE `tb_infemp` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `eslogon` varchar(250) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_oferta`
+--
+
+CREATE TABLE `tb_oferta` (
+  `id_oferta` int(11) NOT NULL,
+  `id_emp` int(11) NOT NULL,
+  `id_condicion` int(11) NOT NULL,
+  `descripcion` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `valor` int(11) NOT NULL,
+  `fecha_incio` datetime NOT NULL,
+  `fecha_cierre` datetime NOT NULL,
+  `cantidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_publicidad`
+--
+
+CREATE TABLE `tb_publicidad` (
+  `id` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `fecha_inicial` date NOT NULL,
+  `fecha_final` date NOT NULL,
+  `anuncio` varchar(250) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tb_user`
 --
 
@@ -83,6 +170,7 @@ CREATE TABLE `tb_user` (
   `nombre` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `apellidos` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `identificacion` int(11) NOT NULL,
+  `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `pass` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `direccion` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `ciudad` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
@@ -90,6 +178,16 @@ CREATE TABLE `tb_user` (
   `pais` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `telefono` varchar(15) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tb_user`
+--
+
+INSERT INTO `tb_user` (`id_user`, `nombre`, `apellidos`, `identificacion`, `email`, `pass`, `direccion`, `ciudad`, `departamento`, `pais`, `telefono`) VALUES
+(1, 'prueba', 'prueba', 1065457445, 'lbgleonel_007@hotmail.com', '123456', 'calle 25 ', 'sahagun', 'cordoba', 'colombia', '3004548878'),
+(2, 'leonel', '', 10646464, 'lbg@hormail.com', '123', 'calle 12', 'sahagun', 'cordoba', 'colombia', '300124578'),
+(3, 'leonel', 'bula gomez', 10646464, 'lbg@hormail.com', '123', 'calle 12', 'sahagun', 'cordoba', 'colombia', '300124578'),
+(4, 'jose', 'solano arroyo', 7824545, 'jose@gmail.com', '123', 'calle 45 #25 - 24', 'monteria', 'cordoba', 'colombia', '7854578');
 
 -- --------------------------------------------------------
 
@@ -127,6 +225,42 @@ ALTER TABLE `tb_categ`
   ADD PRIMARY KEY (`id_cat`);
 
 --
+-- Indices de la tabla `tb_compra`
+--
+ALTER TABLE `tb_compra`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tb_cond_serv`
+--
+ALTER TABLE `tb_cond_serv`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tb_empr_public`
+--
+ALTER TABLE `tb_empr_public`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tb_infemp`
+--
+ALTER TABLE `tb_infemp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tb_oferta`
+--
+ALTER TABLE `tb_oferta`
+  ADD PRIMARY KEY (`id_oferta`);
+
+--
+-- Indices de la tabla `tb_publicidad`
+--
+ALTER TABLE `tb_publicidad`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tb_user`
 --
 ALTER TABLE `tb_user`
@@ -158,10 +292,35 @@ ALTER TABLE `tb_anunciante`
 ALTER TABLE `tb_categ`
   MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT de la tabla `tb_compra`
+--
+ALTER TABLE `tb_compra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tb_empr_public`
+--
+ALTER TABLE `tb_empr_public`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tb_infemp`
+--
+ALTER TABLE `tb_infemp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tb_oferta`
+--
+ALTER TABLE `tb_oferta`
+  MODIFY `id_oferta` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tb_publicidad`
+--
+ALTER TABLE `tb_publicidad`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tb_user_anuc`
 --
