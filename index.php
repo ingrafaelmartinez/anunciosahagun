@@ -1,6 +1,9 @@
 <?php
  include 'scripts/funciones.php';
-Conectar();
+ include 'scripts/conexion.php';
+ include 'scripts/funciones.class.php';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,7 +14,7 @@ Conectar();
   </head>
   <body>
     <header id="main-header">
-    
+
     <a id="logo-header" href="index.php">
       <span class="site-name">ANUNCIOS</span>
       <span class="site-desc">Compra facil sin salir de tu casa</span>
@@ -20,14 +23,14 @@ Conectar();
     <nav>
       <ul>
         <li><a href="#">Inicio</a></li>
-        <li><a href="#">Login </a></li>
+        <li><a href="login.html">Login </a></li>
         <li><a href="registro.php">Registrate</a></li>
       </ul>
     </nav><!-- / nav -->
 
   </header><!-- / #main-header -->
 
-  
+
   <section id="main-content">
     </header>
 <div class="contenedor">
@@ -38,7 +41,8 @@ Conectar();
       <h2>Categorías</h2>
       <ul id="category-list">
         <?php
-        $infocat = ListarCategoria();
+        $categoria = new funciones($base);
+        $infocat = $categoria->ListarCategoria();
         foreach ($infocat as $valor): ?>
           <li><a href="vercat.php?cat=<?=$valor[0]?>"><?=$valor[1]?></a></li>
           <hr>
