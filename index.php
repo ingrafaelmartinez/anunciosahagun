@@ -1,9 +1,9 @@
 <?php
  include 'scripts/funciones.php';
- include 'scripts/conexion.php';
- include 'scripts/funciones.class.php';
+ // include 'scripts/conexion.php';
+ // include 'scripts/funciones.class.php';
 
-
+Conectar();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -41,8 +41,8 @@
       <h2>Categorías</h2>
       <ul id="category-list">
         <?php
-        $categoria = new funciones($base);
-        $infocat = $categoria->ListarCategoria();
+        //$categoria = new funciones($base);
+        $infocat = ListarCategoria();
         foreach ($infocat as $valor): ?>
           <li><a href="vercat.php?cat=<?=$valor[0]?>"><?=$valor[1]?></a></li>
           <hr>
