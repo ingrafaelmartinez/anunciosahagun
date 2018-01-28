@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>registro</title>
-</head>
-<body>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/styles.css">
+		<title>Registro</title>
+	</head>
+	<body>
 
-	<form action="scripts/valreg.php" method="post">
-		<label>Nombre</label><br>
-		<input type="text" name="txtnom"><br>
-		<label>Apellido</label><br>
-		<input type="text" name="txtapel"><br>
-		<label>Identificacion</label><br>
-		<input type="text" name="txtident"><br>
-		<label>Email</label><br>
-		<input type="Email" name="txtemail"><br>
-		<label>Contraseña</label><br>
-		<input type="password" name="txtpass"><br>
-		<label>Direccion</label><br>
-		<input type="text" name="txtdir"><br>
-		<label>Ciudad</label><br>
-		<input type="text" name="txtciu"><br>
-		<label>Departamento</label><br>
-		<input type="text" name="txtdep"><br>
-		<label>Pais</label><br>
-		<input type="text" name="txtpais"><br>
-		<label>Telefono</label><br>
-		<input type="text" name="txttel"><br><br>
-		<input type="submit" name="Registar">
+		<?php include("includes/header.php") ?>
 
+		<form action="scripts/valreg.php" method="post">
+			<label>Nombre</label><br>
+			<input type="text" name="txtnom"><br>
+			<label>Apellido</label><br>
+			<input type="text" name="txtapel"><br>
+			<label>Identificacion</label><br>
+			<input type="text" name="txtident"><br>
+			<label>Email</label><br>
+			<input type="Email" name="txtemail"><br>
+			<label>Contraseña</label><br>
+			<input type="password" name="txtpass"><br>
+			<label>Direccion</label><br>
+			<input type="text" name="txtdir"><br>
+			<label>Ciudad</label><br>
+			<input type="text" name="txtciu"><br>
+			<label>Departamento</label><br>
+			<input type="text" name="txtdep"><br>
+			<label>Pais</label><br>
+			<input type="text" name="txtpais"><br>
+			<label>Telefono</label><br>
+			<input type="text" name="txttel"><br><br>
+			<input type="submit" name="Registar">
+		</form>
 
-	</form>
+		<?php include("includes/footer.php") ?>
 
-</body>
+	</body>
 </html>

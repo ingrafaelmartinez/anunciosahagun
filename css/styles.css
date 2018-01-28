@@ -9,6 +9,7 @@ body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
 }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Yanone Kaffeesatz', sans-serif;
   letter-spacing: 1.5px;
@@ -18,11 +19,12 @@ h1, h2, h3, h4, h5, h6 {
   background: #333;
   color: white;
   height: 80px;
-} 
-  #main-header a {
-    color: white;
-  }
- 
+}
+
+#main-header a {
+  color: white;
+}
+
 /*
  * Logo
  */
@@ -31,51 +33,52 @@ h1, h2, h3, h4, h5, h6 {
   padding: 15px 0 0 20px;
   text-decoration: none;
 }
-  #logo-header:hover {
-    color: #0b76a6;
-  }
-  
-  #logo-header .site-name {
-    display: block;
-    font-weight: 700;
-    font-size: 1.2em;
-  }
-  
-  #logo-header .site-desc {
-    display: block;
-    font-weight: 300;
-    font-size: 0.8em;
-    color: #999;
-  }
-  
- 
+#logo-header:hover {
+  color: #0b76a6;
+}
+
+#logo-header .site-name {
+  display: block;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+#logo-header .site-desc {
+  display: block;
+  font-weight: 300;
+  font-size: 0.8em;
+  color: #999;
+}
+
+
 /*
  * Navegación
  */
 nav {
   float: right;
 }
-  nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    padding-right: 20px;
-  }
-  
-    nav ul li {
-      display: inline-block;
-      line-height: 80px;
-    }
-      
-      nav ul li a {
-        display: block;
-        padding: 0 10px;
-        text-decoration: none;
-      }
-      
-        nav ul li a:hover {
-          background: #0b76a6;
-        }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-right: 20px;
+}
+
+nav ul li {
+  display: inline-block;
+  line-height: 80px;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background: #0b76a6;
+}
 
 li{
   list-style: none;
