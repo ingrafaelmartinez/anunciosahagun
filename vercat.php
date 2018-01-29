@@ -62,7 +62,27 @@ $cat = VerCategoria($id);
          </div>
 
        <?php endforeach; ?>
-
+       <section>
+        <div>
+           <img src="photo/img1.jpg">
+           <h2>nombre producto</h2>
+           <h4>nmbre de la empresa </h4>
+           <p>descripcion </p>
+           <h3>cantidad Disponible:  <strong>200</strong></h3>
+           <time>29/01/2018</time><br>
+           <time>29/03/2018</time><br>
+           <a href=""><button>Comprar</button></a>
+         </div>
+          <div>
+             <img src="photo/img2.jpg" width="250px" height="250px">
+             <h2>nombre producto</h2>
+             <p>descripcion </p>
+             <h3>cantidad Disponible</h3>
+             <time>29/01/2018</time><br>
+             <time>29/03/2018</time><br>
+             <a href=""><button>Comprar</button></a>
+         </div>
+       </section>
 
 
      </section>
