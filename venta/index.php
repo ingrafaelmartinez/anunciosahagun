@@ -9,7 +9,7 @@
 	</header>
 	<nav>
 		<ul>
-			<li>nuevo Registro</li>
+			<li><a href="registro.php">nuevo Registro</a></li>
 			<li>Login</li>
 			<li>politicas Y servicios</li>
 			<li>acerda de</li>
