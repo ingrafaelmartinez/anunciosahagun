@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2018 a las 20:29:30
+-- Tiempo de generación: 31-01-2018 a las 12:31:54
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -43,12 +43,25 @@ CREATE TABLE `tb_anunciante` (
   `id` int(11) NOT NULL,
   `nombre` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `nit` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `pass` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `telefono` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `direccion` int(11) NOT NULL,
-  `ciudad` int(11) NOT NULL,
-  `departamento` int(11) NOT NULL,
-  `pais` int(11) NOT NULL
+  `direccion` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `ciudad` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `departamento` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `pais` varchar(150) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tb_anunciante`
+--
+
+INSERT INTO `tb_anunciante` (`id`, `nombre`, `nit`, `email`, `pass`, `telefono`, `direccion`, `ciudad`, `departamento`, `pais`) VALUES
+(1, 'prueba', '12121', 'prueba@hotmail.com', '123', '154545', 'calle', 'sahagun', 'cordoba', 'colombia'),
+(2, 'leonel', '106394780', 'leonel@hotmail.com', '123456', '7878454', 'calle 15', 'sahagun', 'cordoba', 'colombia'),
+(3, 'probando', '', 'probando@hotmail.com', 'carrera 11', '7777', '', 'sahagun', 'cordoba', 'colombia'),
+(4, 'saurtidora', '106487854', 'sutidora@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '7745482', 'calle 8 # 25 - 25', 'monteria', 'cordoba', 'colombia'),
+(5, 'ferreteria sabana', '7845128-8', 'sabana@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '7772525', 'calle 14 # 2 -  12', 'sahagun', 'cordoba', 'colombia');
 
 -- --------------------------------------------------------
 
@@ -109,6 +122,8 @@ CREATE TABLE `tb_empr_public` (
   `id` int(11) NOT NULL,
   `nit` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `rasonSocial` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `pass` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `telefono` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `direccion` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `ciudad` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
@@ -187,7 +202,13 @@ INSERT INTO `tb_user` (`id_user`, `nombre`, `apellidos`, `identificacion`, `emai
 (1, 'prueba', 'prueba', 1065457445, 'lbgleonel_007@hotmail.com', '123456', 'calle 25 ', 'sahagun', 'cordoba', 'colombia', '3004548878'),
 (2, 'leonel', '', 10646464, 'lbg@hormail.com', '123', 'calle 12', 'sahagun', 'cordoba', 'colombia', '300124578'),
 (3, 'leonel', 'bula gomez', 10646464, 'lbg@hormail.com', '123', 'calle 12', 'sahagun', 'cordoba', 'colombia', '300124578'),
-(4, 'jose', 'solano arroyo', 7824545, 'jose@gmail.com', '123', 'calle 45 #25 - 24', 'monteria', 'cordoba', 'colombia', '7854578');
+(4, 'jose', 'solano arroyo', 7824545, 'jose@gmail.com', '123', 'calle 45 #25 - 24', 'monteria', 'cordoba', 'colombia', '7854578'),
+(5, '', '', 0, '', '', '', '', '', '', ''),
+(6, '', '', 0, '', '', '', '', '', '', ''),
+(7, '', '', 0, '', '', '', '', '', '', ''),
+(8, 'meivis', 'bula', 164464, 'meivis@hotmail.com', '123', 'calle21', 'sahagun', 'cordoba', 'colombia', '333333'),
+(9, 'meivis', 'bula', 164464, 'meivis@hotmail.com', '123', 'calle21', 'sahagun', 'cordoba', 'colombia', '333333'),
+(10, 'juan', 'rios', 124545, 'juan@gmail.com', '147852', 'calle 25', 'sahagun', 'cordoba', 'colombia', '7887888');
 
 -- --------------------------------------------------------
 
@@ -285,7 +306,7 @@ ALTER TABLE `empre_user`
 -- AUTO_INCREMENT de la tabla `tb_anunciante`
 --
 ALTER TABLE `tb_anunciante`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tb_categ`
 --
@@ -320,7 +341,7 @@ ALTER TABLE `tb_publicidad`
 -- AUTO_INCREMENT de la tabla `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `tb_user_anuc`
 --

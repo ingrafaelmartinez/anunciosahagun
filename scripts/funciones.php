@@ -21,6 +21,11 @@ function VerCategoria($id){
   $respusta_array = array();
   while($fila = $result->fetch_row())
     $respusta_array[] = $fila;
-  return $respusta_array; 
+  return $respusta_array;
 }
+function Desconectar(){
+  global $conexion;
+  mysqli_close($conexion);
+}
+
  ?>
