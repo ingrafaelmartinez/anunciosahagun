@@ -42,6 +42,30 @@ function CondicionEmp($id){
     $respuesta_array[] = $fila;
   return $respuesta_array;
 }
+function VerCondicion($id){
+  global $conexion;
+  $result = mysqli_query($conexion,"SELECT * FROM `tb_cond_serv` WHERE id=".$id);
+  $respuesta_array = array();
+  while ($fila=$result->fetch_row())
+    $respuesta_array[] = $fila;
+  return $respuesta_array;
+}
+function EditarCondicion($id,$desc){
+  global $conexion;
+  mysqli_query($conexion,"UPDATE `tb_cond_serv` SET `contenido` = '$desc' WHERE `tb_cond_serv`.`id` =".$id);
+}
+function InfEmpresa($id){
+  global $conexion;
+  $result = mysqli_query($conexion, "SELECT * FROM `tb_anunciante` WHERE id=".$id);
+  $respuesta_array = array();
+  while($fila=$result->fetch_row())
+    $respuesta_array[] = $fila;
+  return $respuesta_array;
+}
+function EliminarCondicion($id){
+  global $conexion;
+  mysqli_query($conexion,"DELETE FROM `tb_cond_serv` WHERE `tb_cond_serv`.`id` =".$id);
+}
 function HaIniciadoSesion(){
   session_start();
   return isset($_SESSION['email']);

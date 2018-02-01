@@ -5,22 +5,8 @@ Conectar();
 if (!HaIniciadoSesion()) {
    header('location: index.php');
  }
-
-   Conectar();
-   if (empty($_POST['txtcond'])) {
-     ?>
-     <script type="text/javascript">
-       alert('El campo esta Vacio')
-     </script>
-     <?php
-
-   }else {
-     $id = $_SESSION['id'];
-     $desc = htmlentities(addslashes($_POST['txtcond']));
-     NuevaCondicion($id,$desc);
-     Desconectar();
-   }
-
+$id = $_SESSION['id'];
+$condic = CondicionEmp($id);
 
 
  ?>
@@ -49,23 +35,27 @@ if (!HaIniciadoSesion()) {
    <br>
   </nav>
   <section>
+    <h2><a href="condic.php">Cancelar<a/></h2>
     <table>
       <thead>
-        <th>
-          <td>#</td>
-          <td>Descripcion</td>
-        </th>
+        <tr>
+          <th>#</th>
+          <th>Descripcion</th>
+        </tr>
       </thead>
       <tbody>
-        <th>
-          <td></td>
-          <td></td>
-        </th>
+        <?php $i = 1; foreach ($condic as $valor): ?>
+          <tr>
+            <td><?= $i++;?></td>
+            <td><?=$valor[2]?></td>
+          </tr>
+        <?php endforeach; ?>
+
       </tbody>
     </table>
   </section>
     <section>
-      <form class="" action="regcond.php" method="post">
+      <form class="" action="scripts/regcond.php" method="post">
         <label for="">Nueva Condiciones de servicio o venta</label><br>
         <input type="text" name="txtcond" value=""><br>
         <input type="submit" name="Agregar" value="Agregar">

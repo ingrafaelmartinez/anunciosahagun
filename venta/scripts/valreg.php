@@ -1,6 +1,7 @@
 <?php
 include 'funciones.php';
 
+
 if (isset($_POST['txtnom']) && isset($_POST['txtnit']) && isset($_POST['txttel'])&&
 isset($_POST['txtemail'])&& isset($_POST['txtpass'])&& isset($_POST['txtdir'])&&
  isset($_POST['txtciu'])&& isset($_POST['txtdep']) && isset($_POST['txtpais'])) {

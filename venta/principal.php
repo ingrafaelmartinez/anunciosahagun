@@ -25,13 +25,13 @@ if (!HaIniciadoSesion()) {
  		<ul>
  			<li><a href="public.php">Anuncios Publicados</a></li>
       <li><a href="venta.php">Ventas</a></li>
-      <li><a href="confVent.php">Validar Venta</a></li>
+      <li><a href="valVenta.php">Validar Venta</a></li>
       <li><a href="nuevAnunc.php">Nuevo Anuncio</a></li>
       <li><a href="condic.php">Condiciones de ventas</a></li>
  		</ul>
 
     <br>
-    
+
 
  	</nav>
  	<h2>PANEL DE VENDEDOR</h2>
