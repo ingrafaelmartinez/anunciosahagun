@@ -30,7 +30,18 @@ function IniciarSecion($email,$pass){
   }
   return false;
 }
-
+function NuevaCondicion($id,$desc){
+  global $conexion;
+  mysqli_query($conexion,"INSERT INTO `tb_cond_serv` (`id`, `id_empresa`, `contenido`) VALUES (NULL, '$id', '$desc')");
+}
+function CondicionEmp($id){
+  global $conexion;
+  $result = mysqli_query($conexion,"SELECT * FROM `tb_cond_serv` WHERE id_empresa=".$id);
+  $respuesta_array = array();
+  while($fila = $result->fetch_row())
+    $respuesta_array[] = $fila;
+  return $respuesta_array;
+}
 function HaIniciadoSesion(){
   session_start();
   return isset($_SESSION['email']);
