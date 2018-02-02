@@ -71,6 +71,12 @@ function HaIniciadoSesion(){
   return isset($_SESSION['email']);
   //return isset($_SESSION['id_empresa']);
 }
+function EditarInf($id,$nom,$nit,$email,$pass,$tel,$dir,$ciu,$dep,$pais){
+  global $conexion;
+  mysqli_query($conexion,"UPDATE `tb_anunciante` SET `nombre` = '$nom', `nit` = '$nit', `email` = '$email',
+                          `pass` = '$pass', `telefono` = '$tel', `direccion` = '$dir', `ciudad` = '$ciu',
+                           `departamento` = '$dep', `pais` = '$pais' WHERE `tb_anunciante`.`id` =".$id);
+}
 function Desconectar(){
   global $conexion;
   mysqli_close($conexion);
