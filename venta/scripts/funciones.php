@@ -77,6 +77,24 @@ function EditarInf($id,$nom,$nit,$email,$pass,$tel,$dir,$ciu,$dep,$pais){
                           `pass` = '$pass', `telefono` = '$tel', `direccion` = '$dir', `ciudad` = '$ciu',
                            `departamento` = '$dep', `pais` = '$pais' WHERE `tb_anunciante`.`id` =".$id);
 }
+function validar($file){
+  if (($file['user-file']['type']!=='image/jpeg')&&($file['user-file']['type']!=='image/png')){
+    return false;
+  }
+  if ($file['user-file']['size'] > 600000) {
+    return false;
+  }
+  return true;
+}
+
+function InserAnuncio($idemp,$cat,$nom,$val,$cant,$inic,$fin,$incl,$img,$cond){
+global $conexion;
+mysqli_query($conexion,"INSERT INTO `tb_oferta` (`id_oferta`, `id_emp`, `id_cat`,
+                        `descripcion`, `valor`, `fecha_incio`, `fecha_cierre`,
+                        `cantidad`, `img`, `inclu`, `condiciones`) VALUES (NULL,
+                          '$idemp', '$cat', '$nom', '$val', '$inic', '$fin', '$cant',
+                           '$img', '$incl ', '$cond')");
+}
 function Desconectar(){
   global $conexion;
   mysqli_close($conexion);

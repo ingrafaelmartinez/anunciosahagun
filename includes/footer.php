@@ -1,7 +1,7 @@
 <footer>
   <div>
     <ul>
-      <li><a href="">Vende Aqui</a></li>
+      <li><a href="venta/index.php">Vende Aqui</a></li>
     </ul>
   </div>
   <!-- El footer para los pies de páginas y conctactos -->
