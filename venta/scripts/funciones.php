@@ -95,6 +95,38 @@ mysqli_query($conexion,"INSERT INTO `tb_oferta` (`id_oferta`, `id_emp`, `id_cat`
                           '$idemp', '$cat', '$nom', '$val', '$inic', '$fin', '$cant',
                            '$img', '$incl ', '$cond')");
 }
+function AnuncioEmpresa($id){
+  global $conexion;
+  $result = mysqli_query($conexion,"SELECT * FROM `tb_oferta` WHERE `id_emp` =".$id);
+  $respuesta_array = array();
+  while($fila = $result->fetch_row())
+    $respuesta_array[] = $fila;
+  return $respuesta_array;
+}
+function ListarCategoria(){
+  global $conexion;
+  $result = mysqli_query($conexion,"SELECT * FROM tb_categ");
+  $respusta_array = array();
+  while($fila = $result->fetch_row())
+    $respusta_array[] = $fila;
+  return $respusta_array;
+}
+function ListarCategoriId($id){
+  global $conexion;
+  $result = mysqli_query($conexion,"SELECT * FROM `tb_categ` WHERE id_cat =".$id);
+  $respusta_array = array();
+  while($fila = $result->fetch_row())
+    $respusta_array[] = $fila;
+  return $respusta_array;
+}
+function OfertaId($id){
+  global $conexion;
+  $result = mysqli_query($conexion,"SELECT * FROM `tb_oferta` WHERE `id_oferta` =".$id);
+  $respusta_array = array();
+  while($fila = $result->fetch_row())
+    $respusta_array[] = $fila;
+  return $respusta_array;
+}
 function Desconectar(){
   global $conexion;
   mysqli_close($conexion);
