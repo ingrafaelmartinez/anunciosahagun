@@ -59,6 +59,7 @@ if (isset($_GET['id'])) {
 
     </select><br>
     <label>Cantidad</label><br>
+    <input type="hidden" name="id" value="<?=$valor[0]?>">
 		<input type="number" name="txtCan" value="<?=$valor[4]?>"><br>
 		<label>Fecha de inicio</label><br>
 		<input type="date" name="txtFechInic" value="<?=$valor[5]?>"><br>

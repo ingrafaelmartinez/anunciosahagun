@@ -47,6 +47,8 @@ $listaOferta = AnuncioEmpresa($id);
     <th>Fecha Inicio</th>
     <th>Fecha de Cierre</th>
     <th>Cantidad</th>
+    <th>Estado</th>
+    <th></th>
     <th>Accion</th>
   </tr>
     </thead>
@@ -67,8 +69,14 @@ $listaOferta = AnuncioEmpresa($id);
         <td><?=$valor[5]?></td>
         <td><?=$valor[6]?></td>
         <td><?=$valor[7]?></td>
+        <td><input type="checkbox" name="<?=$valor[11]?>" <?php if($valor[11]=='1') echo "checked" ?>></td>
+        <?php if ($valor[11]=='1'){ ?>
+           <td><a href="activaroferta.php?id=<?= $valor[0] ?>"><button type="button" name="button">Desactivar</button></a></td>
+        <?php }else{ ?>
+         <td><a href="desctofert.php?id=<?= $valor[0] ?>"><button type="button" name="button">Activar</button></a></td>
+       <?php } ?>
         <td><a href="EditarOferta.php?id=<?=$valor[0]?>">Editar</a></td>
-        <td><a href="">Eliminar</a></td>
+        <td><a href="">Ver</a></td>
       </tr>
         <?php endforeach; ?>
     </tbody>

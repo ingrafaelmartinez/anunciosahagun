@@ -127,6 +127,13 @@ function OfertaId($id){
     $respusta_array[] = $fila;
   return $respusta_array;
 }
+function EditarOferta($id,$cat,$nom,$val,$cant,$inic,$fin,$incl,$imgN,$cond){
+  global $conexion;
+  mysqli_query($conexion,"UPDATE `tb_oferta` SET `id_cat` = '$cat', `descripcion` = '$nom',
+                          `valor` = '$val', `fecha_incio` = '$inic', `fecha_cierre` = '$fin',
+                           `cantidad` = '$cant', `img` = '$imgN', `inclu` = '$incl',
+                            `condiciones` = '$cond' WHERE `tb_oferta`.`id_oferta` =".$id);
+}
 function Desconectar(){
   global $conexion;
   mysqli_close($conexion);
