@@ -134,6 +134,10 @@ function EditarOferta($id,$cat,$nom,$val,$cant,$inic,$fin,$incl,$imgN,$cond){
                            `cantidad` = '$cant', `img` = '$imgN', `inclu` = '$incl',
                             `condiciones` = '$cond' WHERE `tb_oferta`.`id_oferta` =".$id);
 }
+function EstadoOferta($id,$est){
+  global $conexion;
+  mysqli_query($conexion,"UPDATE `tb_oferta` SET `estado` = '$est' WHERE `tb_oferta`.`id_oferta` =".$id);
+}
 function Desconectar(){
   global $conexion;
   mysqli_close($conexion);
