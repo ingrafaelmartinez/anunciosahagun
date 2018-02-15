@@ -22,12 +22,9 @@ $oferta = OfertaId($id);
     <h2>Cantidad</h2><?=$valor[7]?>
     <h2>Incluye</h2><?=$valor[9]?>
     <h2>Condiciones</h2><?=$valor[10]?>
-    <form class="" action="scripts/desoferta.php" method="post">
-      <input type="hidden" name="txtid" value="<?=$valor[0]?>">
-      Desactivar oferta:
-      <input type="checkbox" name="txtEsta" value="1"><br>
-      <input type="submit" name="Desactivar" value="Desactivar">
-    </form>
+    <h2>Estado Oferta : <?php if($valor[11]=='1'){ echo "Activa"; }else {
+      echo "Inactiva";
+    }; ?></h2>
   <?php endforeach; ?>
 </section>
 </body>

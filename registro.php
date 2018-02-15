@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/styles.css">
-		<title>Registro</title>
-	</head>
-	<body>
-
 		<?php include("includes/header.php") ?>
 
 		<form action="scripts/valreg.php" method="post">
@@ -34,6 +25,3 @@
 		</form>
 
 		<?php include("includes/footer.php") ?>
-
-	</body>
-</html>

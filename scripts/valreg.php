@@ -4,20 +4,32 @@
 // include 'funciones.class.php';
 include 'funciones.php';
 
-$nom =  $_POST['txtnom'];
-$ape = $_POST['txtapel'];
-$ident = $_POST['txtident'];
-$email = $_POST['txtemail'];
-$pass = $_POST['txtpass'];
-$dir = $_POST['txtdir'];
-$ciu = $_POST['txtciu'];
-$dep = $_POST['txtdep'];
-$pais = $_POST['txtpais'];
-$tel = $_POST['txttel'];
+$nom =  htmlentities(addslashes($_POST['txtnom']),ENT_QUOTES);
+$ape = htmlentities(addslashes($_POST['txtapel']),ENT_QUOTES);
+$ident = htmlentities(addslashes($_POST['txtident']),ENT_QUOTES);
+$email = htmlentities(addslashes($_POST['txtemail']),ENT_QUOTES);
+$pass1 = htmlentities(addslashes($_POST['txtpass']),ENT_QUOTES);
+$dir = htmlentities(addslashes($_POST['txtdir']),ENT_QUOTES);
+$ciu = htmlentities(addslashes($_POST['txtciu']),ENT_QUOTES);
+$dep = htmlentities(addslashes($_POST['txtdep']),ENT_QUOTES);
+$pais = htmlentities(addslashes($_POST['txtpais']),ENT_QUOTES);
+$tel = htmlentities(addslashes($_POST['txttel']),ENT_QUOTES);
+$cif = '$genesis$/';
+$pass = sha1(sha1(md5(($cif.$pass1))));
 
 //var_dump($_POST);
-Conectar();
-RegistrarUser($nom,$ape,$ident,$email,$pass,$dir,$ciu,$dep,$pais,$tel);
+if (veriEmail($email)) {
+  ?>
+<script type="text/javascript">
+  alert('Email incresado ya Exite');
+  location.href="../registro.php";
+</script>
+  <?php
+}else {
+  Conectar();
+  RegistrarUser($nom,$ape,$ident,$email,$pass,$dir,$ciu,$dep,$pais,$tel);
+  header('location: ../cuenta.php');
+}
 
 // $funciones = new funciones($base);
 // $usuario = new Usuario();

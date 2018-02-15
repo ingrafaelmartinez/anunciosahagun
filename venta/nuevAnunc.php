@@ -8,30 +8,7 @@ if (!HaIniciadoSesion()) {
 
  ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Nuevo</title>
-</head>
-<body>
-	<header>
-    <h1>anuncios</h1>
-    <ul>
-      <li><?php echo $_SESSION['email']; ?></li>
-      <li><a href="config.php">Configuraciones</a></li>
-      <li><a href="scripts/salir.php">Salir<a/></li>
-    </ul>
- 	</header>
- 	<nav>
- 		<ul>
- 			<li><a href="public.php">Anuncios Publicados</a></li>
-      <li><a href="venta.php">Ventas</a></li>
-      <li><a href="valVenta.php">Validar Venta</a></li>
-      <li><a href="anuncio.php">Anuncios<a/></li>
-      <li><a href="nuevAnunc.php">Nuevo Anuncio</a></li>
-      <li><a href="condic.php">Condiciones de ventas</a></li>
- 		</ul>
-
+ <?php include 'include/header.php'; ?>
     <br>
 	<h2>Nuevo anuncio</h2>
 	<a href="anuncio.php">Cancelar</a>

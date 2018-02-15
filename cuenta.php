@@ -8,7 +8,7 @@
 		<h2>nombre</h2>
 		<ul>
 			<li><a href="">Perfil</a></li>
-			<li> <a href="">salir</a></li>
+			<li> <a href="scripts/salir.php">salir</a></li>
 		</ul>
 	</header>
 	<nav>

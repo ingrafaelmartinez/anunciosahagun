@@ -9,30 +9,7 @@ if (isset($_GET['id'])) {
 }
 $resul = VerCondicion($id);
  ?>
- <!DOCTYPE html>
- <html>
- <head>
-  <title>Cuenta</title>
- </head>
- <body>
-  <header>
-    <h1>anuncios</h1>
-    <ul>
-      <li><?php echo $_SESSION['email']; ?></li>
-      <li><a href="config.php">Configuraciones</a></li>
-      <li><a href="scripts/salir.php">Salir<a/></li>
-    </ul>
-  </header>
-  <nav>
-    <ul>
-      <li><a href="public.php">Anuncios Publicados</a></li>
-      <li><a href="venta.php">Ventas</a></li>
-      <li><a href="confVent.php">Validar Venta</a></li>
-      <li><a href="nuevAnunc.php">Nuevo Anuncio</a></li>
-      <li><a href="condic.php">Condiciones de ventas</a></li>
-    </ul>
-    <br>
-   </nav>
+  <?php include 'include/header.php'; ?>
    <section>
      <h2><a href="condic.php">Cancelar<a/></h2>
 
