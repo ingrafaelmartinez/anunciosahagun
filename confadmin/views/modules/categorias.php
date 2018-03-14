@@ -4,7 +4,7 @@ include 'menu.php';
 ?>
     <section>
       <h2>LISTA DE CATEGORIAS</h2>
-      <a href="nuevacat.php">Nueva Categoria</a>
+      <a href="nuevacat">Nueva Categoria</a>
       <br>
       <hr>
 

@@ -1,34 +1,37 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>categorias</title>
-  </head>
-  <body>
-    <header>
-      <h2>anunciossahagun</h2>
+<?php
+include 'header.php';
+include 'menu.php';
+include 'barrasuperior.php';
+?>
 
-      <a href="#">salir</a>
-    </header>
-    <nav>
-      <ul>
-        <li><a href="categorias.php">Categorias</a></li>
-        <li><a href="#">Clientes</a></li>
-      </ul>
-    </nav>
-    <section>
-      <h2>NUEVA CATEGORIAS</h2>
-      <a href="Categoria.php">cancelar</a>
-      <br>
-      <hr>
-      <form class="" action="scripts/insetcat.php" method="post">
-        <label for="">Nombre categoria</label>
-        <input type="text" name="txtnom" value="">
-        <input type="submit" name="Guardar" value="Guardar">
-      </form>
-      <section>
 
-      </section>
-    <footer>&copy 2018</footer>
-  </body>
-</html>
+      <div id="galeria" class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
+
+			<hr>
+
+			<p><span class="fa fa-arrow-down"></span>Registrar nueva Categoria</p>
+
+				<ul id="lightbox">
+          <form class="form-inline" action="/action_page.php">
+          <br>
+          <div class="form-group">
+            <label class="" for="email">Nombre Nueva Categoria:</label>
+            <input type="email" class="form-control" id="email" name="registarCantegoria">
+          </div>
+          <button type="submit" class="btn btn-default">Crear</button>
+
+        </form>
+
+        <br>
+
+				</ul>
+
+
+
+			</div>
+
+
+
+<?php
+include 'footer.php';
+?>

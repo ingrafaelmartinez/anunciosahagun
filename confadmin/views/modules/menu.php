@@ -41,6 +41,7 @@
 
 						<li><a href="principal">Inicio <span class="glyphicon glyphicon-new-window"></span></a></li>
 						<li><a href="baner">Baner <span class="glyphicon glyphicon-new-window"></span></a></li>
+						<li><a href="categorias">Categoria<span class="glyphicon glyphicon-new-window"></span></a></li>
 						<li><a href="articulos">Artículos <span class="glyphicon glyphicon-new-window"></span></a></li>
 						<li><a href="galeria">Imágenes <span class="glyphicon glyphicon-new-window"></span></a></li>
 						<li><a href="videos">Videos <span class="glyphicon glyphicon-new-window"></span></a></li>

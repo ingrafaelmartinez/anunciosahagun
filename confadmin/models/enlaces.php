@@ -6,6 +6,7 @@ class EnlacesModels{
 
     if ($enlace == 'principal' ||
         $enlace == 'categorias' ||
+        $enlace == 'nuevacat' ||
         $enlace == 'usuarios' ||
         $enlace == 'ingreso' ||
         $enlace == 'config' ||

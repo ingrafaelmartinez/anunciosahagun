@@ -13,5 +13,4 @@
 
     </div>
     <script src="views/js/validaringreso.js"></script>
-  </body>
-</html>
+  
