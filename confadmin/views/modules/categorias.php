@@ -1,6 +1,7 @@
 <?php
 include 'header.php';
 include 'menu.php';
+include 'barrasuperior.php';
 ?>
     <section>
       <h2>LISTA DE CATEGORIAS</h2>
@@ -18,11 +19,10 @@ include 'menu.php';
         </thead>
         <tbody>
 
-            <tr>
-              <td></td>
-              <td></td>
-              <td><a href="">Editar</a></td>
-            </tr>
+          <?php
+            $categoria = new gestorCategoria();
+            $categoria->listaCategoria();
+           ?>
 
 
         </tbody>

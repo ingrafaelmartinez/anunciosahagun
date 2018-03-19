@@ -12,14 +12,17 @@ include 'barrasuperior.php';
 			<p><span class="fa fa-arrow-down"></span>Registrar nueva Categoria</p>
 
 				<ul id="lightbox">
-          <form class="form-inline" action="/action_page.php">
+          <form class="form-inline" method="post">
           <br>
           <div class="form-group">
             <label class="" for="email">Nombre Nueva Categoria:</label>
-            <input type="email" class="form-control" id="email" name="registarCantegoria">
+            <input type="text" class="form-control" name="categoria">
           </div>
           <button type="submit" class="btn btn-default">Crear</button>
-
+          <?php
+              $categoria = new gestorCategoria();
+              $categoria->agregarCategoria();
+           ?>
         </form>
 
         <br>

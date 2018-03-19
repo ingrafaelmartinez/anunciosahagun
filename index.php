@@ -1,25 +1,16 @@
 <?php
- include 'scripts/funciones.php';
- // include 'scripts/conexion.php';
- // include 'scripts/funciones.class.php';
 
-Conectar();
-?>
-    <?php include("includes/header.php") ?>
+require_once 'models/enlaces.php';
+require_once 'models/ingreso.php';
+require_once 'models/gestorSlide.php';
+require_once 'models/gestorCategoria.php';
+
+require_once 'controllers/template.php';
+require_once 'controllers/enlaces.php';
+require_once 'controllers/ingreso.php';
+require_once 'controllers/gestorSlide.php';
+require_once 'controllers/gestorCategoria.php';
 
 
-    <?php include("includes/categoria.php"); ?>
-
-    <section>
-      <h2></h2>
-      <div class="">
-
-      </div>
-      <!-- aqui el section para los anuncios -->
-    </section>
-
-    <section>
-      <!-- aqui el section para los anuncios -->
-    </section>
-
-    <?php include("includes/footer.php") ?>
+$template = new TemplateController();
+$template -> template();

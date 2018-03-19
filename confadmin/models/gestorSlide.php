@@ -7,7 +7,7 @@ class GestorSlideModel{
   public function subirImagenSlider($datos,$tabla){
 
     $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (ruta) VALUES (:ruta)");
-    $stmt -> bindParam(":ruta", $datos, PDO::PARAM_STR);
+    $stmt -> bindParam(":ruta", $datos,PDO::PARAM_STR);
 
     if ($stmt->execute()) {
       echo "ok";

@@ -152,11 +152,12 @@ if (!$_SESSION["validar"]) {
         <form class="" method="post" >
         <label for="">Nombre categoria</label>
         <?php
-          $edit = new gestorCategoria();
-          $edit->verCategoriaController();
-          $edit->actualizarCategoriaController();
+          $elim = new gestorCategoria();
+          $elim->verCategoriaController();
+          $elim->EliminarCategoriaController();
          ?>
-           <input type="submit" name="Editar" value="Editar">
+         <input type="submit" name="Eliminar" value="Eliminar">
+
 
       </form>
       <section>
