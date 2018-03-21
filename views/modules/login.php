@@ -9,7 +9,7 @@
 
     <?php include("includes/header.php") ?>
 
-    <form class="" action="scripts/valUser.php" method="post">
+    <form class="" method="post">
       <label for="">Email usuario</label><br>
       <input type="email" name="txtemail" value=""><br>
       <label for="">Contraseña</label><br>

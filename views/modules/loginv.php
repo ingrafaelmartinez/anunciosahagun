@@ -10,8 +10,8 @@
     </header>
     <nav>
       <ul>
-  			<li><a href="registro.php">nuevo Registro</a></li>
-  			<li><a href="login.php">Login</a></li>
+  			<li><a href="registrov">nuevo Registro</a></li>
+  			<li><a href="loginv">Login</a></li>
   			<li>politicas Y servicios</li>
   			<li>acerda de</li>
   			<li>preguntas frecuentes</li>
@@ -19,10 +19,7 @@
     </nav>
       <section>
         <div class="login">
-          <?php if (isset($_GET['error'])) {
-            echo "<h2>Datos incorectos</h2>";
-          } ?>
-          <form class="" action="scripts/valLogin.php" method="post">
+            <form class="" method="post">
             <label for="">Email</label><br>
             <input type="email" name="txtEmail" value=""><br>
             <label for="">Contraseña</label><br>
