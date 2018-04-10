@@ -1,36 +1,3 @@
-<?php
-  $servidor = Ruta::ctrRutaServidor();
-
-  $url = Ruta::ctrRuta();
-
-  $ruta = $rutas[0];
-
-  $baner = ControladorProductos::ctrMostrarBanner($ruta);
-
-  $tilulo1 = json_decode($baner["titulo1"],true);
-  $tilulo2 = json_decode($baner["titulo2"],true);
-  $tilulo3 = json_decode($baner["titulo3"],true);
-
-  if ($baner != null) {
-  echo '<figure class="banner">
-
-      <img src="'.$servidor.$baner["img"].'" class="img-responsive" width="100%">
-
-      <div class="textoBanner '.$baner["estilo"].'">
-
-        <h1 style="color:'.$tilulo1["color"].'">'.$tilulo1["texto"].'</h1>
-
-        <h2 style="color:'.$tilulo2["color"].'">'.$tilulo2["texto"].'</strong></h2>
-
-        <h3 style="color:'.$tilulo3["color"].'">'.$tilulo3["texto"].'</h3>
-
-      </div>
-
-  </figure>';
-}
-?>
-
-
 <div class="container-fluid well well-sm barraProductos">
 
      <div class="container">
@@ -43,8 +10,8 @@
                <ul class="dropdown-menu" role="menu">
                  <?php
 
-      						echo '<li><a href="'.$url.$rutas[0].'/1/recientes">Más reciente</a></li>
-      							     <li><a href="'.$url.$rutas[0].'/1/antiguos">Más antiguo</a></li>';
+      						echo '<li><a href="'.$url.$rutas[0].'/1/recientes/'.$rutas[3].'">Más reciente</a></li>
+      							     <li><a href="'.$url.$rutas[0].'/1/antiguos/'.$rutas[3].'">Más antiguo</a></li>';
 
 
                  ?>
@@ -133,54 +100,17 @@
 
     }
 
-    /*=============================================
-    LLAMADO DE PRODUCTOS DE CATEGORÍAS, SUBCATEGORÍAS Y DESTACADOS
-    =============================================*/
+    $productos = null;
+    $listaProductos = null;
+    $ordenar = "id";
 
-    if($rutas[0] == "articulos-gratis"){
+    if (isset($rutas[3])){
 
-      $item2 = "precio";
-      $valor2 = 0;
-      $ordenar = "id";
+      $busqueda = $rutas[3];
+      $productos = ControladorProductos::ctrBuscarProductos($busqueda,$ordenar, $modo, $base, $tope);
+      $listaProductos = ControladorProductos::ctrListarProductosBusqueda($busqueda);
 
-    }else if($rutas[0] == "lo-mas-vendido"){
-
-      $item2 = null;
-      $valor2 = null;
-      $ordenar = "ventas";
-
-    }else if($rutas[0] == "lo-mas-visto"){
-
-      $item2 = null;
-      $valor2 = null;
-      $ordenar = "vistas";
-
-    }else{
-
-      $ordenar = "id";
-      $item1 = "ruta";
-      $valor1 = $rutas[0];
-
-      $categoria = ControladorProductos::ctrMostrarCategorias($item1, $valor1);
-
-      if(!$categoria){
-
-        $subCategoria = ControladorProductos::ctrMostrarSubCategorias($item1, $valor1);
-
-        $item2 = "id_subcategoria";
-        $valor2 = $subCategoria[0]["id"];
-
-      }else{
-
-        $item2 = "id_categoria";
-        $valor2 = $categoria["id"];
-
-      }
     }
-
-    $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item2, $valor2, $base, $tope, $modo);
-    $listaProductos = ControladorProductos::ctrListarProductos($ordenar, $item2, $valor2);
-
 
     if (!$productos) {
         echo '<div class="col-xs-12 error404 text-center">
@@ -435,13 +365,13 @@
 
                           for($i = 1; $i <= 4; $i ++){
 
-                            echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+                            echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
 
                           }
 
                           echo ' <li class="disabled"><a>...</a></li>
-                               <li id="item'.$pagProductos.'"><a href="'.$url.$rutas[0].'/'.$pagProductos.'">'.$pagProductos.'</a></li>
-                               <li><a href="'.$url.$rutas[0].'/2"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                               <li id="item'.$pagProductos.'"><a href="'.$url.$rutas[0].'/'.$pagProductos.'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$pagProductos.'</a></li>
+                               <li><a href="'.$url.$rutas[0].'/2/'.$i.'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 
                           </ul>';
 
@@ -460,17 +390,17 @@
                             $numPagActual = $rutas[1];
 
                             echo '<ul class="pagination">
-                                <li><a href="'.$url.$rutas[0].'/'.($numPagActual-1).'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li> ';
+                                <li><a href="'.$url.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li> ';
 
                             for($i = $numPagActual; $i <= ($numPagActual+3); $i ++){
 
-                              echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+                              echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
 
                             }
 
                             echo ' <li class="disabled"><a>...</a></li>
-                                 <li id="item'.$pagProductos.'"><a href="'.$url.$rutas[0].'/'.$pagProductos.'">'.$pagProductos.'</a></li>
-                                 <li><a href="'.$url.$rutas[0].'/'.($numPagActual+1).'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                 <li id="item'.$pagProductos.'"><a href="'.$url.$rutas[0].'/'.$pagProductos.'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$pagProductos.'</a></li>
+                                 <li><a href="'.$url.$rutas[0].'/'.($numPagActual+1).'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 
                             </ul>';
 
@@ -489,19 +419,19 @@
                             $numPagActual = $rutas[1];
 
                             echo '<ul class="pagination">
-                               <li><a href="'.$url.$rutas[0].'/'.($numPagActual-1).'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                               <li id="item1"><a href="'.$url.$rutas[0].'/1">1</a></li>
+                               <li><a href="'.$url.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                               <li id="item1"><a href="'.$url.$rutas[0].'/1/'.$rutas[2].'/'.$rutas[3].'">1</a></li>
                                <li class="disabled"><a>...</a></li>
                             ';
 
                             for($i = $numPagActual; $i <= ($numPagActual+3); $i ++){
 
-                              echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+                              echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
 
                             }
 
 
-                            echo '  <li><a href="'.$url.$rutas[0].'/'.($numPagActual+1).'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                            echo '  <li><a href="'.$url.$rutas[0].'/'.($numPagActual+1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                               </ul>';
                         }
 
@@ -514,14 +444,14 @@
                           $numPagActual = $rutas[1];
 
                           echo '<ul class="pagination">
-                               <li><a href="'.$url.$rutas[0].'/'.($numPagActual-1).'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                               <li id="item1"><a href="'.$url.$rutas[0].'/1">1</a></li>
+                               <li><a href="'.$url.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                               <li id="item1"><a href="'.$url.$rutas[0].'/1/'.$rutas[2].'/'.$rutas[3].'">1</a></li>
                                <li class="disabled"><a>...</a></li>
                             ';
 
                           for($i = ($pagProductos-3); $i <= $pagProductos; $i ++){
 
-                            echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+                            echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
 
                           }
 
@@ -535,7 +465,7 @@
 
                         for($i = 1; $i <= $pagProductos; $i ++){
 
-                          echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+                          echo '<li id="item'.$i.'"><a href="'.$url.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
 
                         }
 

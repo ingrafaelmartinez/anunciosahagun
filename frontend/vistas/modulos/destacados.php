@@ -1,1709 +1,370 @@
-<figure class="banner">
+<?php
+		$servidor = Ruta::ctrRutaServidor();
 
-	<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/banner/default.jpg" class="img-responsive" width="100%">
+		$ruta = "sin-categoria";
 
-	<div class="textoBanner textoDer">
+		$baner = ControladorProductos::ctrMostrarBanner($ruta);
 
-		<h1 style="color:#fff">OFERTAS ESPECIALES</h1>
+		$tilulo1 = json_decode($baner["titulo1"],true);
+		$tilulo2 = json_decode($baner["titulo2"],true);
+		$tilulo3 = json_decode($baner["titulo3"],true);
+		if ($baner != null) {			
 
-		<h2 style="color:#fff"><strong>50% off</strong></h2>
+		echo '<figure class="banner">
 
-		<h3 style="color:#fff">Termina el 31 de Octubre</h3>
+				<img src="'.$servidor.$baner["img"].'" class="img-responsive" width="100%">
 
-	</div>
+				<div class="textoBanner '.$baner["estilo"].'">
 
-</figure>
-<!--=====================================
-BARRA PRODUCTOS GRATIS
-======================================-->
+					<h1 style="color:'.$tilulo1["color"].'">'.$tilulo1["texto"].'</h1>
 
-<div class="container-fluid well well-sm barraProductos">
+					<h2 style="color:'.$tilulo2["color"].'">'.$tilulo2["texto"].'</strong></h2>
 
-	<div class="container">
-
-		<div class="row">
-
-			<div class="col-xs-12 organizarProductos">
-
-				<div class="btn-group pull-right">
-
-					 <button type="button" class="btn btn-default btnGrid" id="btnGrid0">
-
-						<i class="fa fa-th" aria-hidden="true"></i>
-
-						<span class="col-xs-0 pull-right"> GRID</span>
-
-					 </button>
-
-					 <button type="button" class="btn btn-default btnList" id="btnList0">
-
-						<i class="fa fa-list" aria-hidden="true"></i>
-
-						<span class="col-xs-0 pull-right"> LIST</span>
-
-					 </button>
+					<h3 style="color:'.$tilulo3["color"].'">'.$tilulo3["texto"].'</h3>
 
 				</div>
 
-			</div>
+		</figure>';
+	}
 
-		</div>
+$titulosModulos = array("ARTÍCULOS GRATUITOS", "LO MÁS VENDIDO", "LO MÁS VISTO");
+$rutasModulos = array("articulos-gratis","lo-mas-vendido","lo-mas-visto");
 
-	</div>
+$base = 0;
+$tope = 4;
 
-</div>
-<!--=====================================
-VITRINA DE PRODUCTOS GRATIS
-======================================-->
+if($titulosModulos[0] == "ARTÍCULOS GRATUITOS"){
 
-<div class="container-fluid productos">
+$ordenar = "id";
+$item = "precio";
+$valor = 0;
+$modo = "DESC";
 
-	<div class="container">
+$gratis = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor,$base, $tope,$modo);
 
-		<div class="row">
+}
 
-			<!--=====================================
-			BARRA TÍTULO
-			======================================-->
+if($titulosModulos[1] == "LO MÁS VENDIDO"){
 
-			<div class="col-xs-12 tituloDestacado">
+$ordenar = "ventas";
+$item = null;
+$valor = null;
+$modo = "DESC";
 
-				<!--===============================================-->
+$ventas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor,$base, $tope,$modo);
 
-				<div class="col-sm-6 col-xs-12">
+}
 
-					<h1><small>ARTÍCULOS GRATUITOS </small></h1>
+if($titulosModulos[2] == "LO MÁS VISTO"){
 
-				</div>
+$ordenar = "vistas";
+$item = null;
+$valor = null;
+$modo = "DESC";
 
-				<!--===============================================-->
+$vistas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor,$base, $tope,$modo);
 
-				<div class="col-sm-6 col-xs-12">
+}
 
-					<a href="articulos-gratis">
+$modulos = array($gratis, $ventas, $vistas);
 
-						<button class="btn btn-default backColor pull-right">
+	for ($i=0; $i < count($titulosModulos) ; $i++) {
 
-							VER MÁS <span class="fa fa-chevron-right"></span>
+		 echo '<div class="container-fluid well well-sm barraProductos">
 
-						</button>
+				 	<div class="container">
 
-					</a>
+				 		<div class="row">
 
-				</div>
+				 			<div class="col-xs-12 organizarProductos">
 
-				<!--===============================================-->
+				 				<div class="btn-group pull-right">
 
-			</div>
+				 					 <button type="button" class="btn btn-default btnGrid" id="btnGrid'.$i.'">
 
-			<div class="clearfix"></div>
+				 						<i class="fa fa-th" aria-hidden="true"></i>
 
-			<hr>
+				 						<span class="col-xs-0 pull-right"> GRID</span>
 
-		</div>
-    <!--=====================================
-    		VITRINA DE PRODUCTOS EN CUADRÍCULA
-    		======================================-->
+				 					 </button>
 
-    		<ul class="grid0">
+				 					 <button type="button" class="btn btn-default btnList" id="btnList'.$i.'">
 
-    			<!-- Producto 1 -->
+				 						<i class="fa fa-list" aria-hidden="true"></i>
 
-    			<li class="col-md-3 col-sm-6 col-xs-12">
+				 						<span class="col-xs-0 pull-right"> LIST</span>
 
-    				<!--===============================================-->
+				 					 </button>
 
-    				<figure>
+				 				</div>
 
-    					<a href="#" class="pixelProducto">
+				 			</div>
 
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/accesorios/accesorio04.jpg" class="img-responsive">
+				 		</div>
 
-    					</a>
+				 	</div>
 
-    				</figure>
+				 </div>
 
-    				<!--===============================================-->
+				 <div class="container-fluid productos">
 
-    				<h4>
+				 	<div class="container">
 
-    					<small>
+				 		<div class="row">
 
-    						<a href="#" class="pixelProducto">
+				 			<div class="col-xs-12 tituloDestacado">
 
-    							Collar de diamantes<br><br>
+				 				<div class="col-sm-6 col-xs-12">
 
-    						</a>
+				 					<h1><small>'.$titulosModulos[$i].'</small></h1>
 
-    					</small>
+				 				</div>
 
-    				</h4>
+				 				<div class="col-sm-6 col-xs-12">
 
-    				<!--===============================================-->
+				 					<a href="'.$rutasModulos[$i].'">
 
-    				<div class="col-xs-6 precio">
+				 						<button class="btn btn-default backColor pull-right">
 
-    					<h2><small>GRATIS</small></h2>
+				 							VER MÁS <span class="fa fa-chevron-right"></span>
 
-    				</div>
+				 						</button>
 
-    				<!--===============================================-->
+				 					</a>
 
-    				<div class="col-xs-6 enlaces">
+				 				</div>
 
-    					<div class="btn-group pull-right">
+				 			</div>
 
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+				 			<div class="clearfix"></div>
 
-    							<i class="fa fa-heart" aria-hidden="true"></i>
+				 			<hr>
 
-    						</button>
+				 		</div>
+						<ul class="grid'.$i.'">';
+						foreach ($modulos[$i] as $key => $value) {
+								echo '<li class="col-md-3 col-sm-6 col-xs-12">
+												<figure>
 
-    						<a href="#" class="pixelProducto">
+						    					<a href="'.$value["ruta"].'" class="pixelProducto">
 
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
+						    						<img src="'.$servidor.$value["portada"].'" class="img-responsive">
 
-    								<i class="fa fa-eye" aria-hidden="true"></i>
+						    					</a>
 
-    							</button>
+						    				</figure>
+												<h4>
 
-    						</a>
+						    					<small>
 
-    					</div>
+						    						<a href="'.$value["ruta"].'" class="pixelProducto">
 
-    				</div>
+						    							'.$value['titulo'].'<br>
+															<span style="color;rgba(0,0,0,0)">-</span>';
 
-    			</li>
+														if ($value['nuevo'] != 0) {
+															echo '<span class="label label-warning fontSize">Nuevo</span> ';
+														}
 
-    			<!-- Producto 2 -->
+														if ($value['oferta'] != 0) {
+															echo '<span class="label label-warning fontSize">'.$value['descuentoOferta'].'% off </span>';
+														}
 
-    			<li class="col-md-3 col-sm-6 col-xs-12">
+						    						echo'</a>
 
-    				<!--===============================================-->
+						    					</small>
 
-    				<figure>
+						    				</h4>
+												<div class="col-xs-6 precio">';
 
-    					<a href="#" class="pixelProducto">
 
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/accesorios/accesorio03.jpg" class="img-responsive">
+													if ($value['precio'] == 0) {
+														echo '	<h2><small>GRATIS</small></h2>';
 
-    					</a>
+													}else {
+														if ($value['oferta'] != 0) {
+															echo '<h2>
+																				<small>
 
-    				</figure>
+									    										<strong class="oferta">USD $'.$value['precio'].'</strong>
 
-    				<!--===============================================-->
+									    									</small>
+							    											<small>$'.$value['precioOferta'].'</small>
+																		</h2>';
 
-    				<h4>
+														}else {
+															echo '<h2><small>COL $'.$value['precio'].'</small></h2>';
+														}
 
-    					<small>
+													}
 
-    						<a href="#" class="pixelProducto">
 
-    							Bolso Deportivo Gris<br><br>
+						    				echo '</div>
+												<div class="col-xs-6 enlaces">
 
-    						</a>
+						    					<div class="btn-group pull-right">
 
-    					</small>
+						    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value['id'].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
 
-    				</h4>
+						    							<i class="fa fa-heart" aria-hidden="true"></i>
 
-    				<!--===============================================-->
+						    						</button>';
+														if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
 
-    				<div class="col-xs-6 precio">
+															if ($value['oferta'] != 0) {
+																echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value['id'].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precioOferta"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
 
-    					<h2><small>GRATIS</small></h2>
+						    											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
-    				</div>
+						    										</button>';
+															}else {
 
-    				<!--===============================================-->
+																echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value['id'].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precio"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
 
-    				<div class="col-xs-6 enlaces">
+						    											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
-    					<div class="btn-group pull-right">
+						    										 </button>';
+															}
 
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+														}
+						    					echo '<a href="'.$value["ruta"].'" class="pixelProducto">
 
-    							<i class="fa fa-heart" aria-hidden="true"></i>
+						    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
 
-    						</button>
+						    								<i class="fa fa-eye" aria-hidden="true"></i>
 
-    						<a href="#" class="pixelProducto">
+						    							</button>
 
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
+						    						</a>
 
-    								<i class="fa fa-eye" aria-hidden="true"></i>
+						    					</div>
 
-    							</button>
+						    				</div>
 
-    						</a>
+						    			</li>';
+						}
 
-    					</div>
+						echo '</ul>
+									<ul class="list'.$i.'" style="display:none">';
+									foreach ($modulos[$i] as $key => $value) {
 
-    				</div>
+					    				echo'<li class="col-xs-12">
 
-    			</li>
 
-    			<!-- Producto 3 -->
+					    			  		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 
-    			<li class="col-md-3 col-sm-6 col-xs-12">
+					    						<figure>
 
-    				<!--===============================================-->
+													<a href="'.$value["ruta"].'" class="pixelProducto">
 
-    				<figure>
+														<img src="'.$servidor.$value["portada"].'" class="img-responsive">
 
-    					<a href="#" class="pixelProducto">
+													</a>
 
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/accesorios/accesorio02.jpg" class="img-responsive">
+					    						</figure>
 
-    					</a>
+					    				  	</div>
 
-    				</figure>
+					    				  	<!--===============================================-->
 
-    				<!--===============================================-->
+					    					<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
 
-    				<h4>
+					    						<h1>
 
-    					<small>
+					    							<small>
 
-    						<a href="#" class="pixelProducto">
+														<a href="'.$value["ruta"].'" class="pixelProducto">
 
-    							Bolso Militar<br><br>
+															'.$value['titulo'].'<br>';
 
-    						</a>
+																if ($value['nuevo'] != 0) {
+																	echo '<span class="label label-warning ">Nuevo</span> ';
+																}
 
-    					</small>
+																if ($value['oferta'] != 0) {
+																	echo '<span class="label label-warning ">'.$value['descuentoOferta'].'% off </span>';
+																}
 
-    				</h4>
 
-    				<!--===============================================-->
+					    									echo'
 
-    				<div class="col-xs-6 precio">
 
-    					<h2><small>GRATIS</small></h2>
+					    								</a>
 
-    				</div>
+					    							</small>
 
-    				<!--===============================================-->
+					    						</h1>
 
-    				<div class="col-xs-6 enlaces">
+					    						<p class="text-muted">'.$value["titular"].'</p>';
 
-    					<div class="btn-group pull-right">
+													if ($value['precio'] == 0) {
+														echo '	<h2><small>GRATIS</small></h2>';
 
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+													}else {
+														if ($value['oferta'] != 0) {
+															echo '<h2>
+																				<small>
 
-    							<i class="fa fa-heart" aria-hidden="true"></i>
+									    										<strong class="oferta">USD $'.$value['precio'].'</strong>
 
-    						</button>
+									    									</small>
+							    											<small>$'.$value['precioOferta'].'</small>
+																		</h2>';
 
-    						<a href="#" class="pixelProducto">
+														}else {
+															echo '<h2><small>COL $'.$value['precio'].'</small></h2>';
+														}
 
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
+													}
 
-    								<i class="fa fa-eye" aria-hidden="true"></i>
+					    						echo '
 
-    							</button>
+					    						<div class="btn-group pull-left enlaces">
 
-    						</a>
+					    					  		<button type="button" class="btn btn-default btn-xs deseos"  idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
 
-    					</div>
+					    					  			<i class="fa fa-heart" aria-hidden="true"></i>
+															</button>';
 
-    				</div>
+																if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
 
-    			</li>
+																	if ($value['oferta'] != 0) {
+																		echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value['id'].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precioOferta"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
 
-    			<!-- Producto 4 -->
+								    											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
-    			<li class="col-md-3 col-sm-6 col-xs-12">
+								    										</button>';
+																	}else {
 
-    				<!--===============================================-->
+																		echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value['id'].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precio"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
 
-    				<figure>
+								    											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
-    					<a href="#" class="pixelProducto">
+								    										 </button>';
+																	}
 
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/accesorios/accesorio01.jpg" class="img-responsive">
+																}
 
-    					</a>
+					    					  		echo '<a href="'.$value["ruta"].'" class="pixelProducto">
 
-    				</figure>
+					    						  		<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
 
-    				<!--===============================================-->
+					    						  		<i class="fa fa-eye" aria-hidden="true"></i>
 
-    				<h4>
+					    						  		</button>
 
-    					<small>
+					    					  		</a>
 
-    						<a href="#" class="pixelProducto">
+					    						</div>
 
-    							Pulsera de diamantes<br>
+					    					</div>
+												<div class="col-xs-12"><hr></div>
+					    				</li>';
+										}
 
-    							<span class="label label-warning fontSize">Nuevo</span>
+					    	echo'</ul>
+					</div>
+				</div>';
+	}
 
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2><small>GRATIS</small></h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    		</ul>
-
-    		<!--=====================================
-    		VITRINA DE PRODUCTOS EN LISTA
-    		======================================-->
-
-    		<ul class="list0" style="display:none">
-
-    			<!-- PRODUCTO 1 -->
-
-    			<li class="col-xs-12">
-
-    				<!--===============================================-->
-
-    				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-
-    					<figure>
-
-    						<a href="#" class="pixelProducto"><img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/accesorios/accesorio04.jpg" class="img-responsive"></a>
-
-    					</figure>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
-
-    					<h1>
-    						<small>
-
-    							<a href="#" class="pixelProducto">Collar de diamantes</a>
-
-    						</small>
-
-    					</h1>
-
-    					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate minus, consectetur beatae fugit odio iure repudiandae quia distinctio, id ducimus molestiae. Obcaecati, unde. Illo molestiae dolorum, saepe nisi enim iusto.</p>
-
-    					<h2><small>GRATIS</small></h2>
-
-    					<div class="btn-group pull-left enlaces">
-
-    						<button type="button" class="btn btn-default btn-xs deseos"  idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    						  		<i class="fa fa-eye" aria-hidden="true"></i>
-
-    						  	</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-12">
-
-    					<hr>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    			</li>
-
-    			<!-- PRODUCTO 2 -->
-
-    			<li class="col-xs-12">
-
-    				<!--===============================================-->
-
-    				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-
-    					<figure>
-
-    						<a href="#" class="pixelProducto"><img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/accesorios/accesorio03.jpg" class="img-responsive"></a>
-
-    					</figure>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
-
-    					<h1>
-    						<small>
-
-    							<a href="#" class="pixelProducto">Bolso Deportivo Gris</a>
-
-    						</small>
-
-    					</h1>
-
-    					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate minus, consectetur beatae fugit odio iure repudiandae quia distinctio, id ducimus molestiae. Obcaecati, unde. Illo molestiae dolorum, saepe nisi enim iusto.</p>
-
-    					<h2><small>GRATIS</small></h2>
-
-    					<div class="btn-group pull-left enlaces">
-
-    						<button type="button" class="btn btn-default btn-xs deseos"  idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    						  		<i class="fa fa-eye" aria-hidden="true"></i>
-
-    						  	</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-12">
-
-    					<hr>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    			</li>
-
-    			<!-- PRODUCTO 3 -->
-
-    			<li class="col-xs-12">
-
-    				<!--===============================================-->
-
-    				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-
-    					<figure>
-
-    						<a href="#" class="pixelProducto"><img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/accesorios/accesorio02.jpg" class="img-responsive"></a>
-
-    					</figure>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
-
-    					<h1>
-    						<small>
-
-    							<a href="#" class="pixelProducto">Bolso Militar</a>
-
-    						</small>
-
-    					</h1>
-
-    					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate minus, consectetur beatae fugit odio iure repudiandae quia distinctio, id ducimus molestiae. Obcaecati, unde. Illo molestiae dolorum, saepe nisi enim iusto.</p>
-
-    					<h2><small>GRATIS</small></h2>
-
-    					<div class="btn-group pull-left enlaces">
-
-    						<button type="button" class="btn btn-default btn-xs deseos"  idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    						  		<i class="fa fa-eye" aria-hidden="true"></i>
-
-    						  	</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-12">
-
-    					<hr>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    			</li>
-
-    			<!-- PRODUCTO 4 -->
-
-    			<li class="col-xs-12">
-
-    				<!--===============================================-->
-
-    				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-
-    					<figure>
-
-    						<a href="#" class="pixelProducto"><img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/accesorios/accesorio01.jpg" class="img-responsive"></a>
-
-    					</figure>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
-
-    					<h1>
-    						<small>
-
-    							<a href="#" class="pixelProducto">Pulsera de Diamantes</a>
-
-    						</small>
-
-    					</h1>
-
-    					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate minus, consectetur beatae fugit odio iure repudiandae quia distinctio, id ducimus molestiae. Obcaecati, unde. Illo molestiae dolorum, saepe nisi enim iusto.</p>
-
-    					<h2><small>GRATIS</small></h2>
-
-    					<div class="btn-group pull-left enlaces">
-
-    						<button type="button" class="btn btn-default btn-xs deseos"  idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    						  		<i class="fa fa-eye" aria-hidden="true"></i>
-
-    						  	</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-12">
-
-    					<hr>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    			</li>
-
-    		</ul>
-
-    	</div>
-
-    </div>
-
-    <!--=====================================
-    BARRA PRODUCTOS MÁS VENDIDOS
-    ======================================-->
-
-    <div class="container-fluid well well-sm barraProductos">
-
-    	<div class="container">
-
-    		<div class="row">
-
-    			<div class="col-xs-12 organizarProductos">
-
-    				<div class="btn-group pull-right">
-
-    					 <button type="button" class="btn btn-default btnGrid" id="btnGrid1">
-
-    						<i class="fa fa-th" aria-hidden="true"></i>
-
-    						<span class="col-xs-0 pull-right"> GRID</span>
-
-    					 </button>
-
-    					 <button type="button" class="btn btn-default btnList" id="btnList1">
-
-    						<i class="fa fa-list" aria-hidden="true"></i>
-
-    						<span class="col-xs-0 pull-right"> LIST</span>
-
-    					 </button>
-
-    				</div>
-
-    			</div>
-
-    		</div>
-
-    	</div>
-
-    </div>
-
-    <!--=====================================
-    VITRINA DE PRODUCTOS MÁS VENDIDOS
-    ======================================-->
-
-    <div class="container-fluid productos">
-
-    	<div class="container">
-
-    		<div class="row">
-
-    			<!--=====================================
-    			BARRA TÍTULO
-    			======================================-->
-
-    			<div class="col-xs-12 tituloDestacado">
-
-    				<!--===============================================-->
-
-    				<div class="col-sm-6 col-xs-12">
-
-    					<h1><small>LO MÁS VENDIDO </small></h1>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-sm-6 col-xs-12">
-
-    					<a href="lo-mas-vendido">
-
-    						<button class="btn btn-default backColor pull-right">
-
-    							VER MÁS <span class="fa fa-chevron-right"></span>
-
-    						</button>
-
-    					</a>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    			</div>
-
-    			<div class="clearfix"></div>
-
-    			<hr>
-
-    		</div>
-
-    		<!--=====================================
-    		VITRINA DE PRODUCTOS EN CUADRÍCULA
-    		======================================-->
-
-    		<ul class="grid1">
-
-    			<!-- Producto 1 -->
-
-    			<li class="col-md-3 col-sm-6 col-xs-12">
-
-    				<!--===============================================-->
-
-    				<figure>
-
-    					<a href="#" class="pixelProducto">
-
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/ropa/ropa03.jpg" class="img-responsive">
-
-    					</a>
-
-    				</figure>
-
-    				<!--===============================================-->
-
-    				<h4>
-
-    					<small>
-
-    						<a href="#" class="pixelProducto">
-
-    							Falda de Flores<br>
-
-    							<span class="label label-warning fontSize">Nuevo</span>
-
-    							<span class="label label-warning fontSize">40% off</span>
-
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2>
-
-    						<small>
-
-    							<strong class="oferta">USD $29</strong>
-
-    						</small>
-
-    						<small>$11</small>
-
-    					</h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    			<!-- Producto 2 -->
-
-    			<li class="col-md-3 col-sm-6 col-xs-12">
-
-    				<!--===============================================-->
-
-    				<figure>
-
-    					<a href="#" class="pixelProducto">
-
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/ropa/ropa04.jpg" class="img-responsive">
-
-    					</a>
-
-    				</figure>
-
-    				<!--===============================================-->
-
-    				<h4>
-
-    					<small>
-
-    						<a href="#" class="pixelProducto">
-
-    							Vestido Jean<br>
-
-    							<span class="label label-warning fontSize">40% off</span>
-
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2>
-
-    						<small>
-
-    							<strong class="oferta">USD $29</strong>
-
-    						</small>
-
-    						<small>$11</small>
-
-    					</h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    			<!-- Producto 3 -->
-
-    			<li class="col-md-3 col-sm-6 col-xs-12">
-
-    				<!--===============================================-->
-
-    				<figure>
-
-    					<a href="#" class="pixelProducto">
-
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/ropa/ropa02.jpg" class="img-responsive">
-
-    					</a>
-
-    				</figure>
-
-    				<!--===============================================-->
-
-    				<h4>
-
-    					<small>
-
-    						<a href="#" class="pixelProducto">
-
-    							Vestido Clásico<br>
-
-    							<span class="label label-warning fontSize">40% off</span>
-
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2>
-
-    						<small>
-
-    							<strong class="oferta">USD $29</strong>
-
-    						</small>
-
-    						<small>$11</small>
-
-    					</h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    			<!-- Producto 4 -->
-
-    			<li class="col-md-3 col-sm-6 col-xs-12">
-
-    				<!--===============================================-->
-
-    				<figure>
-
-    					<a href="#" class="pixelProducto">
-
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/ropa/ropa06.jpg" class="img-responsive">
-
-    					</a>
-
-    				</figure>
-
-    				<!--===============================================-->
-
-    				<h4>
-
-    					<small>
-
-    						<a href="#" class="pixelProducto">
-
-    							Top Dama
-
-    							<br>
-    							<br>
-
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2>
-
-    						<small>USD $29</small>
-
-    					</h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    		</ul>
-
-    		<!--=====================================
-    		VITRINA DE PRODUCTOS EN LISTA
-    		======================================-->
-
-    		<ul class="list1" style="display:none">
-
-    			<!-- PRODUCTO 1 -->
-
-    				<li class="col-xs-12">
-
-    					<!--===============================================-->
-
-    			  		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-
-    						<figure>
-
-    							<a href="#" class="pixelProducto">
-
-    								<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/ropa/ropa03.jpg" class="img-responsive">
-
-    							</a>
-
-    						</figure>
-
-    				  	</div>
-
-    				  	<!--===============================================-->
-
-    					<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
-
-    						<h1>
-
-    							<small>
-
-    								<a href="#" class="pixelProducto">
-
-    									Falda de Flores
-
-    									<span class="label label-warning">Nuevo</span>
-
-    									<span class="label label-warning">40% off</span>
-
-    								</a>
-
-    							</small>
-
-    						</h1>
-
-    						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate minus, consectetur beatae fugit odio iure repudiandae quia distinctio, id ducimus molestiae. Obcaecati, unde. Illo molestiae dolorum, saepe nisi enim iusto.</p>
-
-    						<h2>
-
-    							<small>
-
-    								<strong class="oferta">USD $29</strong>
-
-    							</small>
-
-    							<small>$11</small>
-
-    						</h2>
-
-    						<div class="btn-group pull-left enlaces">
-
-    					  		<button type="button" class="btn btn-default btn-xs deseos"  idProducto="1" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    					  			<i class="fa fa-heart" aria-hidden="true"></i>
-
-    					  		</button>
-
-    					  		<a href="falda-de-flores-1" class="pixelProducto">
-
-    						  		<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    						  		<i class="fa fa-eye" aria-hidden="true"></i>
-
-    						  		</button>
-
-    					  		</a>
-
-    						</div>
-
-    					</div>
-
-    				</li>
-
-    		</ul>
-
-    	</div>
-
-    </div>
-
-    <!--=====================================
-    BARRA PRODUCTOS MÁS VISTOS
-    ======================================-->
-
-    <div class="container-fluid well well-sm barraProductos">
-
-    	<div class="container">
-
-    		<div class="row">
-
-    			<div class="col-xs-12 organizarProductos">
-
-    				<div class="btn-group pull-right">
-
-    					 <button type="button" class="btn btn-default btnGrid" id="btnGrid2">
-
-    						<i class="fa fa-th" aria-hidden="true"></i>
-
-    						<span class="col-xs-0 pull-right"> GRID</span>
-
-    					 </button>
-
-    					 <button type="button" class="btn btn-default btnList" id="btnList2">
-
-    						<i class="fa fa-list" aria-hidden="true"></i>
-
-    						<span class="col-xs-0 pull-right"> LIST</span>
-
-    					 </button>
-
-    				</div>
-
-    			</div>
-
-    		</div>
-
-    	</div>
-
-    </div>
-
-    <!--=====================================
-    VITRINA DE PRODUCTOS MÁS VISTOS
-    ======================================-->
-
-    <div class="container-fluid productos">
-
-    	<div class="container">
-
-    		<div class="row">
-
-    			<!--=====================================
-    			BARRA TÍTULO
-    			======================================-->
-
-    			<div class="col-xs-12 tituloDestacado">
-
-    				<!--===============================================-->
-
-    				<div class="col-sm-6 col-xs-12">
-
-    					<h1><small>LO MÁS VISTO </small></h1>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-sm-6 col-xs-12">
-
-    					<a href="lo-mas-visto">
-
-    						<button class="btn btn-default backColor pull-right">
-
-    							VER MÁS <span class="fa fa-chevron-right"></span>
-
-    						</button>
-
-    					</a>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    			</div>
-
-    			<div class="clearfix"></div>
-
-    			<hr>
-
-    		</div>
-
-    		<!--=====================================
-    		VITRINA DE PRODUCTOS EN CUADRÍCULA
-    		======================================-->
-
-    		<ul class="grid2" >
-
-    			<!-- Producto 1 -->
-
-    			<li class="col-md-3 col-sm-6 col-xs-12">
-
-    				<!--===============================================-->
-
-    				<figure>
-
-    					<a href="#" class="pixelProducto">
-
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/cursos/curso05.jpg" class="img-responsive">
-
-    					</a>
-
-    				</figure>
-
-    				<!--===============================================-->
-
-    				<h4>
-
-    					<small>
-
-    						<a href="#" class="pixelProducto">
-
-    							Curso de Bootstrap <br>
-
-    							<span class="label label-warning fontSize">90% off</span>
-
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2>
-
-    						<small>
-
-    							<strong class="oferta">USD $100</strong>
-
-    						</small>
-
-    						<small>$10</small>
-
-    					</h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="404" imagen="http://localhost/backend/vistas/img/productos/cursos/curso05.jpg" titulo="Curso de Bootstrap" precio="10" tipo="virtual" peso="0"  data-toggle="tooltip" title="Agregar al carrito de compras">
-
-    							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    			<!-- Producto 2 -->
-
-    			<li class="col-md-3 col-sm-6 col-xs-12">
-
-    				<!--===============================================-->
-
-    				<figure>
-
-    					<a href="#" class="pixelProducto">
-
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/cursos/curso04.jpg" class="img-responsive">
-
-    					</a>
-
-    				</figure>
-
-    				<!--===============================================-->
-
-    				<h4>
-
-    					<small>
-
-    						<a href="#" class="pixelProducto">
-
-    							Curso de Canvas y Javascript <br>
-
-    							<span class="label label-warning fontSize">90% off</span>
-
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2>
-
-    						<small>
-
-    							<strong class="oferta">USD $100</strong>
-
-    						</small>
-
-    						<small>$10</small>
-
-    					</h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="404" imagen="http://localhost/backend/vistas/img/productos/cursos/curso04.jpg" titulo="Curso de Canvas y Javascript" precio="10" tipo="virtual" peso="0"  data-toggle="tooltip" title="Agregar al carrito de compras">
-
-    							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    			<!-- Producto 3 -->
-
-    			<li class="col-md-3 col-sm-6 col-xs-12">
-
-    				<!--===============================================-->
-
-    				<figure>
-
-    					<a href="#" class="pixelProducto">
-
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/cursos/curso02.jpg" class="img-responsive">
-
-    					</a>
-
-    				</figure>
-
-    				<!--===============================================-->
-
-    				<h4>
-
-    					<small>
-
-    						<a href="#" class="pixelProducto">
-
-    							Aprende Javascript desde cero <br>
-
-    							<span class="label label-warning fontSize">90% off</span>
-
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2>
-
-    						<small>
-
-    							<strong class="oferta">USD $100</strong>
-
-    						</small>
-
-    						<small>$10</small>
-
-    					</h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="404" imagen="http://localhost/backend/vistas/img/productos/cursos/curso02.jpg" titulo="Aprende Javascript desde cero" precio="10" tipo="virtual" peso="0"  data-toggle="tooltip" title="Agregar al carrito de compras">
-
-    							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    			<!-- Producto 4 -->
-
-    			<li class="col-md-3 col-sm-6 col-xs-12">
-
-    				<!--===============================================-->
-
-    				<figure>
-
-    					<a href="#" class="pixelProducto">
-
-    						<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/cursos/curso03.jpg" class="img-responsive">
-
-    					</a>
-
-    				</figure>
-
-    				<!--===============================================-->
-
-    				<h4>
-
-    					<small>
-
-    						<a href="#" class="pixelProducto">
-
-    							Curso de jQuery <br>
-
-    							<span class="label label-warning fontSize">90% off</span>
-
-    						</a>
-
-    					</small>
-
-    				</h4>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 precio">
-
-    					<h2>
-
-    						<small>
-
-    							<strong class="oferta">USD $100</strong>
-
-    						</small>
-
-    						<small>$10</small>
-
-    					</h2>
-
-    				</div>
-
-    				<!--===============================================-->
-
-    				<div class="col-xs-6 enlaces">
-
-    					<div class="btn-group pull-right">
-
-    						<button type="button" class="btn btn-default btn-xs deseos" idProducto="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    							<i class="fa fa-heart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="404" imagen="http://localhost/backend/vistas/img/productos/cursos/curso03.jpg" titulo="Curso de jQuery" precio="10" tipo="virtual" peso="0"  data-toggle="tooltip" title="Agregar al carrito de compras">
-
-    							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-    						</button>
-
-    						<a href="#" class="pixelProducto">
-
-    							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    								<i class="fa fa-eye" aria-hidden="true"></i>
-
-    							</button>
-
-    						</a>
-
-    					</div>
-
-    				</div>
-
-    			</li>
-
-    		</ul>
-
-    		<!--=====================================
-    		VITRINA DE PRODUCTOS EN LISTA
-    		======================================-->
-
-    		<ul class="list2" style="display:none">
-
-    			<!-- PRODUCTO 1 -->
-
-    				<li class="col-xs-12">
-
-    					<!--===============================================-->
-
-    			  		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-
-    						<figure>
-
-    							<a href="#" class="pixelProducto">
-
-    								<img src="http://localhost:8088/anunciosahagun/confAdmin/vistas/img/productos/cursos/curso05.jpg" class="img-responsive">
-
-    							</a>
-
-    						</figure>
-
-    				  	</div>
-
-    				  	<!--===============================================-->
-
-    					<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
-
-    						<h1>
-
-    							<small>
-
-    								<a href="#" class="pixelProducto">
-
-    									Curso de Bootstrap
-
-    									<span class="label label-warning">90% off</span>
-
-    								</a>
-
-    							</small>
-
-    						</h1>
-
-    						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate minus, consectetur beatae fugit odio iure repudiandae quia distinctio, id ducimus molestiae. Obcaecati, unde. Illo molestiae dolorum, saepe nisi enim iusto.</p>
-
-    						<h2>
-
-    							<small>
-
-    								<strong class="oferta">USD $100</strong>
-
-    							</small>
-
-    							<small>$10</small>
-
-    						</h2>
-
-    						<div class="btn-group pull-left enlaces">
-
-    					  		<button type="button" class="btn btn-default btn-xs deseos"  idProducto="1" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-    					  			<i class="fa fa-heart" aria-hidden="true"></i>
-
-    					  		</button>
-
-    					  		<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="404" imagen="http://localhost/backend/vistas/img/productos/cursos/curso05.jpg" titulo="Curso de Bootstrap" precio="10" tipo="virtual" peso="0" data-toggle="tooltip" title="Agregar al carrito de compras">
-
-    								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-    							</button>
-
-    					  		<a href="#" class="pixelProducto">
-
-    						  		<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-    						  		<i class="fa fa-eye" aria-hidden="true"></i>
-
-    						  		</button>
-
-    					  		</a>
-
-    						</div>
-
-    					</div>
-
-    				</li>
-
-    		</ul>
-
-    	</div>
-
-    </div>
+ ?>
